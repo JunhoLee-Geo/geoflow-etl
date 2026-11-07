@@ -1,0 +1,22 @@
+version: 1
+output_dir: ../reports
+datasets:
+  - name: sample_points
+    path: ../data/sample/points.csv
+    format: csv
+    source_crs: EPSG:4326
+    id_column: id
+    required_columns: [name]
+    source_description: Synthetic test points; not real locations or analytical results
+    license: Synthetic fixture created for this repository
+    max_invalid_fraction: 0.5
+    target_crs: EPSG:26917
+  - name: sample_geojson
+    path: ../data/sample/points.geojson
+    format: geojson
+    source_crs: EPSG:4326
+    id_column: id
+    required_columns: [name]
+    source_description: Synthetic GeoJSON test points; not analytical output
+    license: Synthetic fixture created for this repository
+    max_invalid_fraction: 0.5

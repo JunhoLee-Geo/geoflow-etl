@@ -1,0 +1,161 @@
+{
+  "run_id": "a9d5da838497f5b087d6b7c1",
+  "dataset": "synthetic_quality",
+  "source": {
+    "source_url": null,
+    "source_name": "quality_cases.geojson",
+    "ingested_at": "2026-11-06T20:49:29.506428+00:00",
+    "sha256": "3b1b9436cdabb30f615b56b4f5d8dec05d61ce2c11f1fdbcfba669d09e486cca",
+    "source_crs": "EPSG:4326",
+    "target_crs": "EPSG:26917"
+  },
+  "summary": {
+    "input_records": 10,
+    "accepted_records": 1,
+    "quarantined_records": 9,
+    "issue_free_records": 1,
+    "issue_count": 14,
+    "pass_rate": 0.1,
+    "rule_counts": {
+      "coordinates_out_of_range": 1,
+      "custom_count_integer": 1,
+      "custom_demo_bounds": 3,
+      "duplicate_id": 2,
+      "duplicate_record": 2,
+      "invalid_geometry": 1,
+      "invalid_geometry_encoding": 1,
+      "null_geometry": 1,
+      "null_value": 1,
+      "required_field": 1
+    },
+    "has_fatal": false
+  },
+  "issues": [
+    {
+      "row_id": 2,
+      "code": "custom_demo_bounds",
+      "severity": "ERROR",
+      "message": "Configured bounds rule failed",
+      "field": null,
+      "action": "quarantine",
+      "reason": "custom_demo_bounds"
+    },
+    {
+      "row_id": 2,
+      "code": "invalid_geometry_encoding",
+      "severity": "ERROR",
+      "message": "Source parsing or normalization failed",
+      "field": null,
+      "action": "quarantine",
+      "reason": "invalid_geometry_encoding"
+    },
+    {
+      "row_id": 2,
+      "code": "null_geometry",
+      "severity": "ERROR",
+      "message": "Geometry is null",
+      "field": null,
+      "action": "quarantine",
+      "reason": "missing_geometry"
+    },
+    {
+      "row_id": 3,
+      "code": "invalid_geometry",
+      "severity": "ERROR",
+      "message": "Self-intersection[-80.45 43.45]",
+      "field": null,
+      "action": "quarantine",
+      "reason": "invalid_geometry:Self-intersection[-80.45 43.45]"
+    },
+    {
+      "row_id": 4,
+      "code": "duplicate_id",
+      "severity": "ERROR",
+      "message": "Source identifier is not unique",
+      "field": "id",
+      "action": "quarantine",
+      "reason": "duplicate_id"
+    },
+    {
+      "row_id": 4,
+      "code": "duplicate_record",
+      "severity": "ERROR",
+      "message": "Attributes and geometry exactly duplicate another record",
+      "field": null,
+      "action": "quarantine",
+      "reason": "duplicate_record"
+    },
+    {
+      "row_id": 5,
+      "code": "duplicate_id",
+      "severity": "ERROR",
+      "message": "Source identifier is not unique",
+      "field": "id",
+      "action": "quarantine",
+      "reason": "duplicate_id"
+    },
+    {
+      "row_id": 5,
+      "code": "duplicate_record",
+      "severity": "ERROR",
+      "message": "Attributes and geometry exactly duplicate another record",
+      "field": null,
+      "action": "quarantine",
+      "reason": "duplicate_record"
+    },
+    {
+      "row_id": 6,
+      "code": "required_field",
+      "severity": "ERROR",
+      "message": "Required field is absent",
+      "field": "name",
+      "action": "quarantine",
+      "reason": "required_value:name"
+    },
+    {
+      "row_id": 7,
+      "code": "custom_count_integer",
+      "severity": "ERROR",
+      "message": "Configured type rule failed",
+      "field": "count",
+      "action": "quarantine",
+      "reason": "custom_count_integer"
+    },
+    {
+      "row_id": 8,
+      "code": "custom_demo_bounds",
+      "severity": "ERROR",
+      "message": "Configured bounds rule failed",
+      "field": null,
+      "action": "quarantine",
+      "reason": "custom_demo_bounds"
+    },
+    {
+      "row_id": 9,
+      "code": "coordinates_out_of_range",
+      "severity": "ERROR",
+      "message": "Longitude/latitude exceeds global limits",
+      "field": null,
+      "action": "quarantine",
+      "reason": "coordinates_out_of_range"
+    },
+    {
+      "row_id": 9,
+      "code": "custom_demo_bounds",
+      "severity": "ERROR",
+      "message": "Configured bounds rule failed",
+      "field": null,
+      "action": "quarantine",
+      "reason": "custom_demo_bounds"
+    },
+    {
+      "row_id": 10,
+      "code": "null_value",
+      "severity": "ERROR",
+      "message": "Required value is null",
+      "field": "name",
+      "action": "quarantine",
+      "reason": "required_value:name"
+    }
+  ]
+}

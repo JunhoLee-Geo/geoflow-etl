@@ -1,0 +1,15 @@
+run_id,row_id,code,severity,field,message
+a9d5da838497f5b087d6b7c1,2,custom_demo_bounds,ERROR,,Configured bounds rule failed
+a9d5da838497f5b087d6b7c1,2,invalid_geometry_encoding,ERROR,,Source parsing or normalization failed
+a9d5da838497f5b087d6b7c1,2,null_geometry,ERROR,,Geometry is null
+a9d5da838497f5b087d6b7c1,3,invalid_geometry,ERROR,,Self-intersection[-80.45 43.45]
+a9d5da838497f5b087d6b7c1,4,duplicate_id,ERROR,id,Source identifier is not unique
+a9d5da838497f5b087d6b7c1,4,duplicate_record,ERROR,,Attributes and geometry exactly duplicate another record
+a9d5da838497f5b087d6b7c1,5,duplicate_id,ERROR,id,Source identifier is not unique
+a9d5da838497f5b087d6b7c1,5,duplicate_record,ERROR,,Attributes and geometry exactly duplicate another record
+a9d5da838497f5b087d6b7c1,6,required_field,ERROR,name,Required field is absent
+a9d5da838497f5b087d6b7c1,7,custom_count_integer,ERROR,count,Configured type rule failed
+a9d5da838497f5b087d6b7c1,8,custom_demo_bounds,ERROR,,Configured bounds rule failed
+a9d5da838497f5b087d6b7c1,9,coordinates_out_of_range,ERROR,,Longitude/latitude exceeds global limits
+a9d5da838497f5b087d6b7c1,9,custom_demo_bounds,ERROR,,Configured bounds rule failed
+a9d5da838497f5b087d6b7c1,10,null_value,ERROR,name,Required value is null

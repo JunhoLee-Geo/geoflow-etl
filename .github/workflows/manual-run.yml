@@ -1,0 +1,47 @@
+name: Manual synthetic ETL
+on:
+  workflow_dispatch:
+    inputs:
+      dataset:
+        description: Approved synthetic file-only dataset
+        required: true
+        type: choice
+        default: sample_points
+        options: [sample_points, sample_geojson, synthetic_geopackage, synthetic_quality]
+# Deliberately no schedule trigger. See docs/AUTOMATION.md before enabling one.
+permissions:
+  contents: read
+jobs:
+  execute:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.12.12
+      - run: uv sync --frozen
+      - name: Run approved file-only dataset
+        env:
+          SELECTED_DATASET: ${{ inputs.dataset }}
+        shell: bash
+        run: |
+          case "$SELECTED_DATASET" in
+            sample_points|sample_geojson) config=configs/sample.yml ;;
+            synthetic_geopackage) config=configs/normalized.yml ;;
+            synthetic_quality) config=configs/quality.yml ;;
+            *) exit 2 ;;
+          esac
+          uv run --frozen geoflow run "$config" --dataset "$SELECTED_DATASET"
+      - name: Upload small quality reports only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: quality-${{ inputs.dataset }}-${{ github.run_id }}
+          path: |
+            reports/**/report.json
+            reports/**/quality.json
+            reports/**/issues.csv
+          retention-days: 7
+          if-no-files-found: warn

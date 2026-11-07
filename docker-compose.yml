@@ -1,0 +1,72 @@
+name: geoflow-etl
+x-app: &app
+  build: .
+  image: geoflow-etl:0.6.0
+  init: true
+  stop_grace_period: 30s
+  security_opt: [no-new-privileges:true]
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-geoflow}
+      POSTGRES_USER: ${POSTGRES_USER:-geoflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    ports: ["127.0.0.1:${POSTGRES_PORT:-5432}:5432"]
+    volumes: [postgis_data:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+  migrate:
+    <<: *app
+    command: [migrate]
+    depends_on:
+      db: {condition: service_healthy}
+    environment: &writer
+      POSTGRES_DB: ${POSTGRES_DB:-geoflow}
+      POSTGRES_USER: ${POSTGRES_USER:-geoflow}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      GEOFLOW_MONITOR_PASSWORD: ${GEOFLOW_MONITOR_PASSWORD:?Set a separate monitoring password}
+  api:
+    <<: *app
+    command: [api]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-geoflow}
+      GEOFLOW_MONITOR_PASSWORD: ${GEOFLOW_MONITOR_PASSWORD:?Set a separate monitoring password}
+      GEOFLOW_CORS_ORIGINS: ${GEOFLOW_CORS_ORIGINS:-}
+      GEOFLOW_PREVIEW_DATASETS: ${GEOFLOW_PREVIEW_DATASETS:-}
+    ports: ["127.0.0.1:8000:8000"]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+  dashboard:
+    <<: *app
+    command: [dashboard]
+    depends_on:
+      api: {condition: service_healthy}
+    environment:
+      GEOFLOW_API_URL: http://api:8000
+    ports: ["127.0.0.1:8501:8501"]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8501/_stcore/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+  etl:
+    <<: *app
+    profiles: [etl]
+    command: [etl, run, configs/sample.yml, --dataset, sample_points]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    environment: *writer
+    volumes: [etl_reports:/app/reports]
+volumes:
+  postgis_data:
+  etl_reports:

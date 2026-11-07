@@ -1,0 +1,17 @@
+version: 1
+output_dir: ../reports
+datasets:
+  - name: synthetic_geopackage
+    path: ../data/sample/points.gpkg
+    format: gpkg
+    layer: synthetic_points
+    source_crs: EPSG:4326
+    target_crs: EPSG:26917
+    id_column: id
+    required_columns: [name]
+    field_mapping:
+      name: display_name
+    trim_fields: [display_name]
+    geometry_normalization: promote_multi
+    source_description: Two synthetic test points; not transit stops or analytical results
+    license: Synthetic fixture created for this repository

@@ -1,0 +1,26 @@
+version: 1
+output_dir: ../reports
+datasets:
+  - name: synthetic_quality
+    path: ../data/sample/quality_cases.geojson
+    format: geojson
+    source_crs: EPSG:4326
+    target_crs: EPSG:26917
+    id_column: id
+    required_columns: [name]
+    geometry_types: [Point, Polygon]
+    max_invalid_fraction: 0.9
+    source_description: Deliberately corrupted synthetic validation fixtures, not real observations
+    license: Synthetic fixture created for this repository
+    quality_rules:
+      - code: custom_count_integer
+        kind: type
+        field: count
+        severity: ERROR
+        action: quarantine
+        parameters: {dtype: integer}
+      - code: custom_demo_bounds
+        kind: bounds
+        severity: ERROR
+        action: quarantine
+        parameters: {min_x: -81, min_y: 43, max_x: -80, max_y: 44}

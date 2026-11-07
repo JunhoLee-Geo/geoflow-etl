@@ -1,0 +1,7 @@
+id,name,longitude,latitude
+A,Valid synthetic A,-80.5,43.5
+B,Valid synthetic B,-80.4,43.4
+C,Out of range,200,43
+D,Bad number,invalid,43
+E,Valid synthetic E,-80.3,43.3
+F,Missing latitude,-80.3,

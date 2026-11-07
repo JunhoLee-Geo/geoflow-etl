@@ -1,0 +1,168 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "valid",
+        "name": "Synthetic",
+        "count": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.5,
+          43.4
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "null",
+        "name": "Synthetic",
+        "count": 2
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bowtie",
+        "name": "Synthetic",
+        "count": 2
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -80.5,
+              43.4
+            ],
+            [
+              -80.4,
+              43.5
+            ],
+            [
+              -80.4,
+              43.4
+            ],
+            [
+              -80.5,
+              43.5
+            ],
+            [
+              -80.5,
+              43.4
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "duplicate",
+        "name": "Synthetic",
+        "count": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.5,
+          43.4
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "duplicate",
+        "name": "Synthetic",
+        "count": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.5,
+          43.4
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "missing",
+        "count": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.5,
+          43.4
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "wrong_type",
+        "name": "Synthetic",
+        "count": "two"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.5,
+          43.4
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bounds",
+        "name": "Synthetic",
+        "count": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -70,
+          43
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "implausible",
+        "name": "Synthetic",
+        "count": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          181,
+          95
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "null_value",
+        "name": null,
+        "count": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -80.5,
+          43.4
+        ]
+      }
+    }
+  ]
+}

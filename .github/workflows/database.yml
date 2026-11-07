@@ -1,0 +1,32 @@
+name: PostGIS integration
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install uv==0.12.12
+      - run: uv sync --frozen --extra dev --extra monitor
+      - name: Start disposable runner-local PostGIS
+        shell: bash
+        run: |
+          password=$(openssl rand -hex 24)
+          echo "::add-mask::$password"
+          echo "GEOFLOW_DATABASE_URL=postgresql://geoflow:$password@127.0.0.1:55432/geoflow_test" >> "$GITHUB_ENV"
+          echo "GEOFLOW_TEST_DATABASE_URL=postgresql://geoflow:$password@127.0.0.1:55432/geoflow_test" >> "$GITHUB_ENV"
+          docker run -d --name geoflow-ci -p 127.0.0.1:55432:5432 -e POSTGRES_USER=geoflow -e POSTGRES_DB=geoflow_test -e POSTGRES_PASSWORD="$password" --health-cmd='pg_isready -U geoflow -d geoflow_test' --health-interval=2s --health-retries=30 postgis/postgis:16-3.4
+          for attempt in $(seq 1 40); do
+            if [ "$(docker inspect -f '{{.State.Health.Status}}' geoflow-ci)" = healthy ]; then exit 0; fi
+            sleep 2
+          done
+          exit 1
+      - run: uv run --frozen --extra dev --extra monitor alembic upgrade head
+      - run: uv run --frozen --extra dev --extra monitor pytest tests/integration -q
+      - if: always()
+        run: docker rm -f geoflow-ci || true

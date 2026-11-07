@@ -1,0 +1,10 @@
+{
+  "captured_on": "2026-11-06",
+  "run_id": "a9d5da838497f5b087d6b7c1",
+  "source": "Running Streamlit dashboard through connected in-app browser",
+  "screenshots": {
+    "data-quality.png": "1f3ff616f336e6afb5836a7a1c1fe435ad467f7c987943c6d5295f7dab894589",
+    "overview.png": "2623f69c06c907dd326393edd293afcc640c2907cf322479cdc5bc0f9db5a35a",
+    "quality-rules.png": "c4c707c03c3a3e0b6250b009a1c0958f93d9b2435517459b427ff85d3943e94f"
+  }
+}

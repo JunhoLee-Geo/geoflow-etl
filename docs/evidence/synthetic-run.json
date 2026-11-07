@@ -1,0 +1,161 @@
+{
+  "run_id": "a9d5da838497f5b087d6b7c1",
+  "dataset": "synthetic_quality",
+  "version": "0.6.0",
+  "started_at": "2026-11-06T20:49:29.509432+00:00",
+  "status": "succeeded",
+  "source_sha256": "3b1b9436cdabb30f615b56b4f5d8dec05d61ce2c11f1fdbcfba669d09e486cca",
+  "source_bytes": 3048,
+  "source_name": "quality_cases.geojson",
+  "config": {
+    "name": "synthetic_quality",
+    "url": null,
+    "layer": null,
+    "download_timeout_seconds": 20.0,
+    "download_retries": 2,
+    "expected_sha256": null,
+    "field_mapping": {},
+    "trim_fields": [],
+    "geometry_normalization": "none",
+    "format": "geojson",
+    "id_column": "id",
+    "required_columns": [
+      "name"
+    ],
+    "quality_rules": [
+      {
+        "code": "custom_count_integer",
+        "kind": "type",
+        "field": "count",
+        "severity": "ERROR",
+        "action": "quarantine",
+        "parameters": {
+          "dtype": "integer"
+        }
+      },
+      {
+        "code": "custom_demo_bounds",
+        "kind": "bounds",
+        "field": null,
+        "severity": "ERROR",
+        "action": "quarantine",
+        "parameters": {
+          "min_x": -81,
+          "min_y": 43,
+          "max_x": -80,
+          "max_y": 44
+        }
+      }
+    ],
+    "x_column": "longitude",
+    "y_column": "latitude",
+    "source_crs": "EPSG:4326",
+    "target_crs": "EPSG:26917",
+    "geometry_types": [
+      "Point",
+      "Polygon"
+    ],
+    "max_invalid_fraction": 0.9,
+    "max_source_bytes": 10000000,
+    "max_records": 100000,
+    "source_description": "Deliberately corrupted synthetic validation fixtures, not real observations",
+    "license": "Synthetic fixture created for this repository",
+    "sink": "postgis",
+    "table": "features"
+  },
+  "artifact_crs": "EPSG:4326",
+  "source_crs": "EPSG:4326",
+  "target_crs": "EPSG:26917",
+  "provenance": {
+    "source_url": null,
+    "source_name": "quality_cases.geojson",
+    "ingested_at": "2026-11-06T20:49:29.506428+00:00"
+  },
+  "transformations": [
+    {
+      "operation": "copy_fields",
+      "mapping": {}
+    },
+    {
+      "operation": "trim_strings",
+      "fields": [],
+      "changed_values": 0
+    },
+    {
+      "operation": "geometry_normalization",
+      "mode": "none",
+      "changed_features": 0
+    },
+    {
+      "operation": "reproject",
+      "source_crs": "EPSG:4326",
+      "target_crs": "EPSG:26917"
+    },
+    {
+      "operation": "geojson_export",
+      "source_crs": "EPSG:26917",
+      "target_crs": "EPSG:4326"
+    }
+  ],
+  "warnings": [],
+  "environment": {
+    "python": "3.12.14",
+    "packages": {
+      "geopandas": "1.2.0",
+      "pandas": "2.3.3",
+      "shapely": "2.2.0",
+      "pyproj": "3.8.0",
+      "pandera": "0.35.0",
+      "pydantic": "2.14.3",
+      "sqlalchemy": "2.1.8",
+      "psycopg": "3.3.8"
+    }
+  },
+  "database_committed": true,
+  "total": 10,
+  "accepted": 1,
+  "rejected": 9,
+  "rule_counts": {
+    "coordinates_out_of_range": 1,
+    "custom_count_integer": 1,
+    "custom_demo_bounds": 3,
+    "duplicate_id": 2,
+    "duplicate_record": 2,
+    "invalid_geometry": 1,
+    "invalid_geometry_encoding": 1,
+    "null_geometry": 1,
+    "null_value": 1,
+    "required_field": 1
+  },
+  "quality_summary": {
+    "input_records": 10,
+    "accepted_records": 1,
+    "quarantined_records": 9,
+    "issue_free_records": 1,
+    "issue_count": 14,
+    "pass_rate": 0.1,
+    "rule_counts": {
+      "coordinates_out_of_range": 1,
+      "custom_count_integer": 1,
+      "custom_demo_bounds": 3,
+      "duplicate_id": 2,
+      "duplicate_record": 2,
+      "invalid_geometry": 1,
+      "invalid_geometry_encoding": 1,
+      "null_geometry": 1,
+      "null_value": 1,
+      "required_field": 1
+    },
+    "has_fatal": false
+  },
+  "loaded": 1,
+  "finished_at": "2026-11-06T20:49:29.927030+00:00",
+  "duration_seconds": 0.422413,
+  "artifacts": {
+    "accepted.geojson": "28814816503131984779215e75883ef2f1dfbe32b4f710695344e03766ca7d4d",
+    "issues.csv": "07de9a7371a97a53a0435b3ea04b58eec7fcae0618fe11fbe98316ad24b531f1",
+    "quality.json": "ab3b0e112bc5997464667f9af0d35ad8bd63de4e8195eab433d6d7c5439cec4a",
+    "quarantine.jsonl": "757ea8e9cd69dd5eac5138cb1769e0d29bcead1b62c0f714a9e06ab878ebfa52",
+    "source.geojson": "3b1b9436cdabb30f615b56b4f5d8dec05d61ce2c11f1fdbcfba669d09e486cca"
+  }
+}

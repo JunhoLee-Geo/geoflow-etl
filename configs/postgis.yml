@@ -1,0 +1,15 @@
+version: 1
+output_dir: ../reports
+datasets:
+  - name: sample_points_postgis
+    path: ../data/sample/points.csv
+    format: csv
+    source_crs: EPSG:4326
+    id_column: id
+    required_columns: [name]
+    source_description: Synthetic ETL fixture; not real-world observations
+    license: Synthetic fixture created for this repository
+    max_invalid_fraction: 0.5
+    target_crs: EPSG:26917
+    sink: postgis
+    table: sample_points

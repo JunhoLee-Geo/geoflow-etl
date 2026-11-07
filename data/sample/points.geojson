@@ -1,0 +1,1 @@
+{"type":"FeatureCollection","features":[{"type":"Feature","properties":{"id":"A","name":"Synthetic A"},"geometry":{"type":"Point","coordinates":[-80.5,43.5]}},{"type":"Feature","properties":{"id":"B","name":"Missing geometry"},"geometry":null}]}
